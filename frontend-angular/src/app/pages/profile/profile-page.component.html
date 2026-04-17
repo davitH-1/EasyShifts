@@ -1,11 +1,12 @@
-@if (loading) {
-  <div>Loading...</div>
-}
+@let user = user$ | async;
 
 @if (user) {
-  <div>
-    <h2>{{ user.name }}</h2>
-    <p>{{ user.email }}</p>
-  </div>
-  <app-auth-card class="cards"></app-auth-card>
+  <mat-card>
+    <mat-card-title>{{ user.name }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ user.email }}</p>
+    </mat-card-content>
+  </mat-card>
+} @else {
+  <app-auth-card></app-auth-card>
 }

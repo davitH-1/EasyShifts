@@ -1,31 +1,20 @@
 import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { AuthCardComponent } from './components/auth-card/auth-card.component';
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  avatarUrl?: string;
-}
+import { UserService } from '../../core/services/user';
 
 @Component({
   selector: 'app-profile-page',
-  imports: [MatCardModule, AuthCardComponent],
+  imports: [MatCardModule, AuthCardComponent, AsyncPipe],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css',
   standalone: true,
 })
 export class ProfilePageComponent {
-  user: any = null;
-  loading = true;
+  user$;
 
-  ngOnInit() {
-    this.user = {
-      name: 'Test User',
-      email: 'test@example.com',
-    };
-
-    this.loading = false;
+  constructor(private userService: UserService) {
+    this.user$ = this.userService.user$;
   }
 }
