@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+mat-divider {
+  height: 0;
+  border-top: 2px solid !important;
+  opacity: 1 !important;
+}
+.page-container {
+  padding: 16px;
+}

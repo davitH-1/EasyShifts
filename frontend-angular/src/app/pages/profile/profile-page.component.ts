@@ -11,7 +11,7 @@ interface User {
 
 @Component({
   selector: 'app-profile-page',
-  imports: [MatCardModule, NgIf],
+  imports: [MatCardModule],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css',
   standalone: true,
