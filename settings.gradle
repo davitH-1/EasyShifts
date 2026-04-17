@@ -1,0 +1,4 @@
+rootProject.name = 'monorepo'
+
+include 'backend-java'
+include 'frontend-angular'
