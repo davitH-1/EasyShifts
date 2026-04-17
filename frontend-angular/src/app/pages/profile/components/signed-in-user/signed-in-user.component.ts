@@ -28,6 +28,8 @@ export class SignedInUserComponent {
     this.auth.logout().subscribe({
       next: () => {
         console.log('logout success');
+
+        this.userService.clearUser(); // IMPORTANT
       },
       error: (err) => {
         console.error('logout failed', err);

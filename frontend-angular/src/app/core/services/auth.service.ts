@@ -21,13 +21,22 @@ export class AuthService {
     window.location.href = `${this.api}/oauth2/authorization/google`;
   }
 
-  logout(): Observable<void> {
-    return this.http.post<void>(`${this.api}/logout`, {}, { withCredentials: false/*true*/ });
+  logout(): Observable<any> {
+    return this.http.post(
+      `${this.api}/logout`,
+      {},
+      {
+        withCredentials: true,
+        responseType: 'text' as 'json'
+      }
+    );
   }
 
   getCurrentUser(): Observable<UserProfile | null> {
-    return this.http
-      .get<UserProfile>(`${this.api}/api/user/me`, { withCredentials: true })
-      .pipe(catchError(() => of(null)));
+    return this.http.get<UserProfile>(`${this.api}/api/user/me`, {
+      withCredentials: true
+    }).pipe(
+      catchError(() => of(null)) // THIS is correct
+    );
   }
 }
