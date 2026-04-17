@@ -1,0 +1,45 @@
+.job-card {
+  margin-bottom: 12px;
+  border-left: 4px solid transparent;
+  padding: 12px;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.job-card:hover {
+  transform: translateY(-2px);
+}
+
+/* STATUS COLORS + UNDERGLOW */
+.pending {
+  border-left-color: orange;
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.3);
+}
+
+.confirmed {
+  border-left-color: green;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.rejected {
+  border-left-color: red;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+}
+
+/* status text */
+.status {
+  font-weight: 400;
+}
+
+.pending .status {
+  color: orange;
+}
+
+.confirmed .status {
+  color: green;
+}
+
+.rejected .status {
+  color: red;
+}
+
+
