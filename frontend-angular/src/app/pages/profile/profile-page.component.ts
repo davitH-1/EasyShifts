@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { AuthCardComponent } from './components/auth-card/auth-card.component';
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  avatarUrl?: string;
-}
+import { User } from '../../core/services/user';
 
 @Component({
   selector: 'app-profile-page',
