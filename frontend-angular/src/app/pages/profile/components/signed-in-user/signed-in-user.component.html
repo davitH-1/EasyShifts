@@ -1,0 +1,11 @@
+<mat-card class="cards">
+  <mat-card-title>{{ user.name }}</mat-card-title>
+
+  <mat-card-content>
+    <p>{{ user.email }}</p>
+  </mat-card-content>
+
+  <button mat-stroked-button color="warn" (click)="logout()">
+    Logout
+  </button>
+</mat-card>

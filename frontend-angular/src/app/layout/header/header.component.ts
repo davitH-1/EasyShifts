@@ -10,7 +10,7 @@ import { UserService } from '../../core/services/user';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatDividerModule, RouterLink, AsyncPipe],
+  imports: [MatToolbarModule, MatButtonModule, MatDividerModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })

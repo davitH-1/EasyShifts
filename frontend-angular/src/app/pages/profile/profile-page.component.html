@@ -1,12 +1,7 @@
 @let user = user$ | async;
 
 @if (user) {
-  <mat-card>
-    <mat-card-title>{{ user.name }}</mat-card-title>
-    <mat-card-content>
-      <p>{{ user.email }}</p>
-    </mat-card-content>
-  </mat-card>
+  <app-signed-in-user [user]="user"></app-signed-in-user>
 } @else {
   <app-auth-card></app-auth-card>
 }
