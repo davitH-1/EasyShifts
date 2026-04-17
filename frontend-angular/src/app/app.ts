@@ -21,7 +21,9 @@ import { MatDivider } from '@angular/material/list';
   imports: [RouterOutlet, HeaderComponent, MatDivider],
   template: `
     <app-header></app-header>
+
     <mat-divider></mat-divider>
+
     <div class="page-container">
       <router-outlet></router-outlet>
     </div>

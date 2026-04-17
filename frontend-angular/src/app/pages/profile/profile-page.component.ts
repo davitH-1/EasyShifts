@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { NgIf } from '@angular/common';
+import { AuthCardComponent } from './components/auth-card/auth-card.component';
 
 interface User {
   id: number;
@@ -11,7 +11,7 @@ interface User {
 
 @Component({
   selector: 'app-profile-page',
-  imports: [MatCardModule],
+  imports: [MatCardModule, AuthCardComponent],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css',
   standalone: true,
