@@ -1,0 +1,7 @@
+<h1>Job Requests</h1>
+
+<div class="job-list">
+  @for (job of jobs; track job.id) {
+    <app-job-card [job]="job"></app-job-card>
+  }
+</div>

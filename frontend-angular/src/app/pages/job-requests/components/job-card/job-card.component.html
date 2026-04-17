@@ -1,0 +1,20 @@
+<mat-card [ngClass]="job.status" class="job-card" (click)="openJob()">
+
+  <mat-card-title>
+    {{ job.locationName }}
+  </mat-card-title>
+
+  <mat-card-content>
+    <p>Date: {{ job.dateTime }}</p>
+
+    <p>Hours: {{ job.startTime }}</p>
+    <p>Hours: {{ job.endTime }}</p>
+    <p>Hours: {{ job.hours }}</p>
+
+
+    <p class="status">
+      Status: {{ job.status }}
+    </p>
+  </mat-card-content>
+
+</mat-card>

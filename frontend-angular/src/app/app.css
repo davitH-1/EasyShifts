@@ -1,0 +1,14 @@
+mat-divider.mat-divider {
+  display: block;
+  margin: 12px 0;
+}
+
+mat-divider.mat-divider::before {
+  border-top: 4px solid red !important;
+}
+
+mat-divider {
+  height: 0;
+  border-top: 4px solid red !important;
+  opacity: 1 !important;
+}
