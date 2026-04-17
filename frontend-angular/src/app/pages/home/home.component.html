@@ -1,2 +1,33 @@
-<h1>Welcome to EasyShifts</h1>
-<h3>Where we make bad scheduling systems easy</h3>
+<div class="dashboard-container">
+  <h1>EasyShifts Dispatch</h1>
+
+  <div class="status-banner">
+    <p><strong>Status:</strong> Monitoring Inbox</p>
+    <p><strong>Model:</strong> Gemma 4 E4B (Local)</p>
+  </div>
+
+  <section class="shift-history">
+    <h2>Automatically Claimed Shifts</h2>
+    <table *ngIf="shifts.length > 0; else noShifts">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Time</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let shift of shifts">
+        <td>{{ shift.date }}</td>
+        <td>{{ shift.location }}</td>
+        <td>{{ shift.startTime }} - {{ shift.endTime }}</td>
+        <td><span class="status-badge">CLAIMED</span></td>
+      </tr>
+      </tbody>
+    </table>
+    <ng-template #noShifts>
+      <p class="empty-msg">No shifts claimed yet. Listening for emails...</p>
+    </ng-template>
+  </section>
+</div>

@@ -1,0 +1,22 @@
+<div class="container">
+    <h2>EasyShifts Bot Status</h2>
+
+    <div class="status-card">
+        <p><strong>Running Model:</strong> Gemma 4 E4B (Local)</p>
+        <p><strong>Last Checked:</strong> 5 minutes ago</p>
+    </div>
+
+    <h3>Claimed Shifts History</h3>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Status</th>
+        </tr>
+        <tr *ngFor="let shift of shifts">
+            <td>{{ shift.date }}</td>
+            <td>{{ shift.location }}</td>
+            <td><span class="badge-success">AUTO-CLAIMED</span></td>
+        </tr>
+    </table>
+</div>
