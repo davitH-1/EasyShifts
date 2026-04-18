@@ -2,3 +2,6 @@
 .gradle
 
 credentials.yml
+credentials.json
+
+pickle.token
