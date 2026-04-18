@@ -31,7 +31,7 @@ public class SecurityConfig {
             )
 
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/user/me").authenticated()
+                .requestMatchers("/api/user/me", "/api/calendar/**").authenticated()
                 .anyRequest().permitAll()
             )
             .oauth2Login(oauth2 -> oauth2
