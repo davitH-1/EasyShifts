@@ -1,10 +1,15 @@
 package com.calculator.backendjava.config;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver;
+import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -17,6 +22,12 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final ClientRegistrationRepository clientRegistrationRepository;
+
+    public SecurityConfig(ClientRegistrationRepository clientRegistrationRepository) {
+        this.clientRegistrationRepository = clientRegistrationRepository;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -34,9 +45,43 @@ public class SecurityConfig {
                 .requestMatchers("/api/user/me").authenticated()
                 .anyRequest().permitAll()
             )
-            .oauth2Login(oauth2 -> oauth2
-                .defaultSuccessUrl("http://localhost:4200/profile", true)
-            )
+                .oauth2Login(oauth2 -> {
+                    oauth2
+                            .authorizationEndpoint(auth -> {
+                                OAuth2AuthorizationRequestResolver defaultResolver =
+                                        new DefaultOAuth2AuthorizationRequestResolver(
+                                                clientRegistrationRepository, "/oauth2/authorization"
+                                        );
+
+                                OAuth2AuthorizationRequestResolver customResolver =
+                                        new OAuth2AuthorizationRequestResolver() {
+                                            @Override
+                                            public OAuth2AuthorizationRequest resolve(HttpServletRequest request) {
+                                                OAuth2AuthorizationRequest req = defaultResolver.resolve(request);
+                                                return customize(req);
+                                            }
+
+                                            @Override
+                                            public OAuth2AuthorizationRequest resolve(HttpServletRequest request, String clientRegistrationId) {
+                                                OAuth2AuthorizationRequest req = defaultResolver.resolve(request, clientRegistrationId);
+                                                return customize(req);
+                                            }
+
+                                            private OAuth2AuthorizationRequest customize(OAuth2AuthorizationRequest req) {
+                                                if (req == null) return null;
+                                                return OAuth2AuthorizationRequest.from(req)
+                                                        .additionalParameters(params -> {
+                                                            params.put("prompt", "consent");
+                                                            params.put("access_type", "offline");
+                                                        })
+                                                        .build();
+                                            }
+                                        };
+
+                                auth.authorizationRequestResolver(customResolver);
+                            })
+                            .defaultSuccessUrl("http://localhost:4200/profile", true);
+                })
             .logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessHandler((req, res, auth) -> {
