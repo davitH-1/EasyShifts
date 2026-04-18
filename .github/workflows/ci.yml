@@ -14,20 +14,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ---------------- FRONTEND (Angular) ----------------
+      # ---------------- FRONTEND ----------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-
+      
       - name: Install frontend dependencies
         run: npm ci
-        working-directory: EasyShifts/EasyShifts/frontend-angular
-
+        working-directory: frontend-angular
+      
       - name: Build Angular app
         run: npm run build
-        working-directory: EasyShifts/EasyShifts/frontend-angular
+        working-directory: frontend-angular
       # ---------------- BACKEND (Spring Boot) ----------------
       - name: Setup Java
         uses: actions/setup-java@v4
