@@ -2,7 +2,7 @@
 
   <div class="page-wrapper">
 
-    <mat-card class="job-detail-card">
+    <mat-card [ngClass]="job.status" class="job-detail-card" >
 
       <mat-card-header>
         <mat-card-title>
@@ -38,7 +38,7 @@
             <span class="value">{{ job.hours }}</span>
           </div>
 
-          <div class="meta-item status" [ngClass]="job.status">
+          <div class="meta-item-status" [ngClass]="job.status">
             <span class="label">Status: </span>
             <span class="value">{{ job.status }}</span>
           </div>

@@ -16,6 +16,7 @@ import { EmailResponseComponent } from './components/email-response/email-respon
 @Component({
   standalone: true,
   templateUrl: './job-detail.component.html',
+  styleUrls: ['./job-detail.component.css'],
   imports: [MatCardModule, NgClass, EmailResponseComponent],
 })
 export class JobDetailComponent implements OnInit, OnDestroy {

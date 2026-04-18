@@ -12,3 +12,9 @@ mat-divider {
   border-top: 4px solid red !important;
   opacity: 1 !important;
 }
+
+.page-wrapper {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}

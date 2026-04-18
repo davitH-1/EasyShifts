@@ -7,10 +7,7 @@
 /* Top card */
 .job-detail-card {
   margin-bottom: 24px;
-  border-radius: 50px;
-}
-.job-card:hover {
-  transform: translateY(-2px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* Grid layout for job metadata */
@@ -38,15 +35,15 @@
 }
 
 /* Status styling (matches your card idea) */
-.meta-item.status.pending .value {
+.meta-item-status.pending .value {
   color: var(--mat-sys-tertiary);
 }
 
-.meta-item.status.confirmed .value {
+.meta-item-status.confirmed .value {
   color: var(--mat-sys-primary);
 }
 
-.meta-item.status.rejected .value {
+.meta-item-status.rejected .value {
   color: var(--mat-sys-error);
 }
 
@@ -66,12 +63,50 @@
   font-size: 0.9rem;
 }
 
-/* spacing between emails */
-app-email-response {
-  display: block;
-  margin-bottom: 16px;
-  padding: 16px;
+/* Update the existing status classes to ensure they apply to the mat-card */
+.job-detail-card.pending {
+  border-left: 4px solid orange;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.4); /* The "Glow" */
 }
 
+.job-detail-card.confirmed {
+  border-left: 4px solid green;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3); /* The "Glow" */
+}
 
+.job-detail-card.rejected {
+  border-left: 4px solid red;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); /* The "Glow" */
+}
+/* STATUS COLORS + UNDERGLOW */
+/*.pending {*/
+/*  border-left-color: orange;*/
+/*  box-shadow: 0 0 10px rgba(255, 165, 0, 0.3);*/
+/*}*/
 
+/*.confirmed {*/
+/*  border-left-color: green;*/
+/*  box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);*/
+/*}*/
+
+/*.rejected {*/
+/*  border-left-color: red;*/
+/*  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);*/
+/*}*/
+
+/*!* status text *!*/
+/*.status {*/
+/*  font-weight: 400;*/
+/*}*/
+
+/*.pending .status {*/
+/*  color: orange;*/
+/*}*/
+
+/*.confirmed .status {*/
+/*  color: green;*/
+/*}*/
+
+/*.rejected .status {*/
+/*  color: red;*/
+/*}*/
