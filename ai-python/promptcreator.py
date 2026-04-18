@@ -1,5 +1,5 @@
 #program to create prompts for the email to send
-
+from email import message
 
 import ollama
 
@@ -14,5 +14,9 @@ message =ollama.chat(
                   'on the '
     'schedule for those shifts'},
 ])
+
+# message =
+
+
 
 print(message['message']['content'])
