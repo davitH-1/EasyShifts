@@ -1,1 +1,45 @@
-<p>email-response works!</p>
+<div class="page-wrapper">
+  <h3>Message Details</h3>
+
+  <div class="response-container" [class.outgoing]="sampleEmail.direction === 'outgoing'">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <div mat-card-avatar class="avatar-box">
+          <mat-icon color="primary">email</mat-icon>
+        </div>
+        <mat-card-title>{{ sampleEmail.from }}</mat-card-title>
+        <mat-card-subtitle>
+          {{ sampleEmail.receivedAt | date:'medium' }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="subject-line"><strong>Subject:</strong> {{ sampleEmail.subject }}</p>
+
+        <div class="email-body">
+          {{ sampleEmail.bodyText }}
+        </div>
+
+        @if (sampleEmail.attachments && sampleEmail.attachments.length > 0) {
+          <div class="attachment-section">
+            <mat-divider></mat-divider>
+            <p class="attachment-label">Attachments ({{ sampleEmail.attachments.length }})</p>
+            <div class="attachment-grid">
+              @for (file of sampleEmail.attachments; track file.id) {
+                <a mat-stroked-button [href]="file.url">
+                  <mat-icon>insert_drive_file</mat-icon>
+                  {{ file.fileName }}
+                </a>
+              }
+            </div>
+          </div>
+        }
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-stroked-button color="warn">DELETE</button>
+        <button mat-flat-button color="primary">REPLY</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
