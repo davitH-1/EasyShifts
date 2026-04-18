@@ -42,7 +42,7 @@ public class SecurityConfig {
             )
 
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/user/me").authenticated()
+                .requestMatchers("/api/user/me", "/api/calendar/**").authenticated()
                 .anyRequest().permitAll()
             )
                 .oauth2Login(oauth2 -> {
@@ -96,7 +96,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedOrigins(List.of("http://localhost"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);

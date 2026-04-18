@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import parse, generate
+from routers import parse, generate, analyze
 
 app = FastAPI(title="EasyShifts AI Service")
 
@@ -13,6 +13,7 @@ app.add_middleware(
 
 app.include_router(parse.router)
 app.include_router(generate.router)
+app.include_router(analyze.router)
 
 
 @app.get("/health")

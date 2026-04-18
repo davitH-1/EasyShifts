@@ -20,3 +20,27 @@ async def parse_pdf(file: UploadFile = File(...)):
     contents = await file.read()
     pages, text = pdf.extract_text(contents)
     return {"filename": file.filename, "pages": pages, "text": text}
+
+
+@router.post("/pdf/analyze")
+async def analyze_pdf(file: UploadFile = File(...)):
+    """Extract text from a PDF and return structured JSON analysis from Ollama."""
+    if not file.filename or not file.filename.endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="File must be a PDF")
+
+    contents = await file.read()
+    pages, text = pdf.extract_text(contents)
+
+    prompt = (
+        "You are a data extraction assistant. Analyze the following document text and return "
+        "a JSON object with these fields: "
+        "\"summary\" (brief summary of the document), "
+        "\"key_points\" (array of important points), "
+        "\"entities\" (array of names, dates, or numbers mentioned), "
+        "\"document_type\" (e.g. invoice, report, schedule, contract). "
+        "Return only valid JSON, no extra text.\n\n"
+        f"Document text:\n{text}"
+    )
+
+    result = ai.chat_json(prompt)
+    return {"filename": file.filename, "pages": pages, "analysis": result}
