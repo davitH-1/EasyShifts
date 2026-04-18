@@ -35,7 +35,7 @@ public class SecurityConfig {
                 .anyRequest().permitAll()
             )
             .oauth2Login(oauth2 -> oauth2
-                .defaultSuccessUrl("http://localhost:4200/profile", true)
+                .defaultSuccessUrl("http://localhost/profile", true)
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
@@ -51,7 +51,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedOrigins(List.of("http://localhost"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
