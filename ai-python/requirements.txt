@@ -2,5 +2,6 @@ fastapi
 uvicorn[standard]
 python-multipart
 pypdf
+httpx
 ollama
 email-service
