@@ -1,0 +1,77 @@
+/*.page-wrapper {*/
+/*  padding: 20px;*/
+/*  max-width: 900px;*/
+/*  margin: 0 auto;*/
+/*}*/
+
+/* Top card */
+.job-detail-card {
+  margin-bottom: 24px;
+  border-radius: 50px;
+}
+.job-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Grid layout for job metadata */
+.job-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.75rem;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.value {
+  font-size: 1rem;
+  color: var(--mat-sys-on-surface);
+  font-weight: 500;
+}
+
+/* Status styling (matches your card idea) */
+.meta-item.status.pending .value {
+  color: var(--mat-sys-tertiary);
+}
+
+.meta-item.status.confirmed .value {
+  color: var(--mat-sys-primary);
+}
+
+.meta-item.status.rejected .value {
+  color: var(--mat-sys-error);
+}
+
+/* EmailService section */
+.email-section {
+  /*margin-top: 16px;*/
+}
+
+.section-title {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  color: var(--mat-sys-on-surface);
+}
+
+.empty-state {
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.9rem;
+}
+
+/* spacing between emails */
+app-email-response {
+  display: block;
+  margin-bottom: 16px;
+  padding: 16px;
+}
+
+
+

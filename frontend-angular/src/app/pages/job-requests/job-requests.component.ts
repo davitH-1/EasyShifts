@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JobCardComponent } from './components/job-card/job-card.component';
-import { JobRequestsService } from '../../core/services/job-requests.service';
+import { JobService } from '../../core/services/job-requests.service';
 import { JobRequest } from '../../core/models/job-request';
 
 @Component({
@@ -12,7 +12,7 @@ import { JobRequest } from '../../core/models/job-request';
 export class JobRequestsComponent {
   jobs: JobRequest[] = [];
 
-  constructor(private jobService: JobRequestsService) {
+  constructor(private jobService: JobService) {
     this.jobs = this.jobService.getJobs();
   }
 }
