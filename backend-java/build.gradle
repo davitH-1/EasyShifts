@@ -1,7 +1,7 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '4.0.5'
-    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.springframework.boot' version '3.2.5' // Downgraded from 4.0.5
+    id 'io.spring.dependency-management' version '1.1.5' // Downgraded from 1.1.7
 }
 
 group = 'com.calculator'
@@ -16,16 +16,29 @@ java {
 
 repositories {
     mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // PDF Parsing
+    implementation 'org.apache.pdfbox:pdfbox:3.0.1'
+
+    // Spring AI + Ollama (Compatible with Boot 3.2.x)
+    implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter:1.0.0-M1'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.named('bootRun') {
+    jvmArgs(['--enable-native-access=ALL-UNNAMED'])
 }
