@@ -37,9 +37,11 @@ jobs:
           java-version: 17
           cache: gradle
 
-      - name: Grant execute permission for gradlew
+      - name: Ensure gradlew permissions (Windows safe)
         working-directory: backend-java
-        run: git update-index --chmod=+x gradlew || true
+        shell: pwsh
+        run: |
+          git update-index --chmod=+x gradlew
 
       - name: Build Spring Boot backend
         working-directory: backend-java
