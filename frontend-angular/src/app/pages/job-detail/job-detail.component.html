@@ -1,5 +1,66 @@
-<h1>Job Detail</h1>
+@if (job) {
 
-<p>Job ID: {{ jobId }}</p>
+  <div class="page-wrapper">
 
-<p>Email chain will be loaded here later...</p>
+    <mat-card [ngClass]="job.status" class="job-detail-card" >
+
+      <mat-card-header>
+        <mat-card-title>
+          {{ job.locationName }}
+        </mat-card-title>
+
+        <mat-card-subtitle>
+          Job ID: {{ jobId }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <div class="job-meta-grid">
+
+          <div class="meta-item">
+            <span class="label">Date: </span>
+            <span class="value">{{ job.dateTime }}</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="label">Start: </span>
+            <span class="value">{{ job.startTime }}</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="label">End: </span>
+            <span class="value">{{ job.endTime }}</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="label">Hours: </span>
+            <span class="value">{{ job.hours }}</span>
+          </div>
+
+          <div class="meta-item-status" [ngClass]="job.status">
+            <span class="label">Status: </span>
+            <span class="value">{{ job.status }}</span>
+          </div>
+
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+
+    <div class="email-section">
+      <h3>Communications</h3>
+      @for (mail of emails; track mail.id) {
+        <app-email-response [email]="mail"></app-email-response>
+      } @empty {
+        <p>No emails found for this job.</p>
+      }
+    </div>
+  </div>
+
+} @else {
+
+  <p>Loading job...</p>
+
+}

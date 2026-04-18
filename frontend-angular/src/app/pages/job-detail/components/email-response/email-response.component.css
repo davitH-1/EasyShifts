@@ -1,0 +1,52 @@
+.response-container {
+  width: 100%;
+  display: flex;
+  padding-bottom: 16px;
+}
+
+mat-card {
+  width: 100%;
+  border-radius: 16px; /* M3 uses slightly larger radii */
+}
+
+.avatar-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mat-sys-surface-variant);
+  border-radius: 8px;
+}
+
+.subject-line {
+  /*margin-top: 16px;*/
+  font-size: 0.9rem;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.email-body {
+  /*padding: 20px 0;*/
+  white-space: pre-wrap;
+  color: var(--mat-sys-on-surface);
+  font-size: 1rem;
+}
+
+.attachment-section {
+  margin-top: 10px;
+}
+
+.attachment-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--mat-sys-on-surface-variant);
+  margin: 10px 0;
+}
+
+.attachment-grid {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

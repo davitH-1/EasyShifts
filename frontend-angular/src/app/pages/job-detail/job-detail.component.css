@@ -1,0 +1,112 @@
+/*.page-wrapper {*/
+/*  padding: 20px;*/
+/*  max-width: 900px;*/
+/*  margin: 0 auto;*/
+/*}*/
+
+/* Top card */
+.job-detail-card {
+  margin-bottom: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Grid layout for job metadata */
+.job-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.75rem;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.value {
+  font-size: 1rem;
+  color: var(--mat-sys-on-surface);
+  font-weight: 500;
+}
+
+/* Status styling (matches your card idea) */
+.meta-item-status.pending .value {
+  color: var(--mat-sys-tertiary);
+}
+
+.meta-item-status.confirmed .value {
+  color: var(--mat-sys-primary);
+}
+
+.meta-item-status.rejected .value {
+  color: var(--mat-sys-error);
+}
+
+/* EmailService section */
+.email-section {
+  /*margin-top: 16px;*/
+}
+
+.section-title {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  color: var(--mat-sys-on-surface);
+}
+
+.empty-state {
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.9rem;
+}
+
+/* Update the existing status classes to ensure they apply to the mat-card */
+.job-detail-card.pending {
+  border-left: 4px solid orange;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.4); /* The "Glow" */
+}
+
+.job-detail-card.confirmed {
+  border-left: 4px solid green;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3); /* The "Glow" */
+}
+
+.job-detail-card.rejected {
+  border-left: 4px solid red;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); /* The "Glow" */
+}
+/* STATUS COLORS + UNDERGLOW */
+/*.pending {*/
+/*  border-left-color: orange;*/
+/*  box-shadow: 0 0 10px rgba(255, 165, 0, 0.3);*/
+/*}*/
+
+/*.confirmed {*/
+/*  border-left-color: green;*/
+/*  box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);*/
+/*}*/
+
+/*.rejected {*/
+/*  border-left-color: red;*/
+/*  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);*/
+/*}*/
+
+/*!* status text *!*/
+/*.status {*/
+/*  font-weight: 400;*/
+/*}*/
+
+/*.pending .status {*/
+/*  color: orange;*/
+/*}*/
+
+/*.confirmed .status {*/
+/*  color: green;*/
+/*}*/
+
+/*.rejected .status {*/
+/*  color: red;*/
+/*}*/
