@@ -23,11 +23,11 @@ jobs:
 
       - name: Install frontend dependencies
         run: npm ci
-        working-directory: EasyShifts/frontend-angular
+        working-directory: EasyShifts/EasyShifts/frontend-angular
 
       - name: Build Angular app
         run: npm run build
-        working-directory: EasyShifts/frontend-angular
+        working-directory: EasyShifts/EasyShifts/frontend-angular
       # ---------------- BACKEND (Spring Boot) ----------------
       - name: Setup Java
         uses: actions/setup-java@v4
