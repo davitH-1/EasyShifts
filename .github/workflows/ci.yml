@@ -1,0 +1,46 @@
+name: CI Build (PR to main)
+
+on:
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ---------------- FRONTEND (Angular) ----------------
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install frontend dependencies
+        working-directory: frontend-angular
+        run: npm ci
+
+      - name: Build Angular app
+        working-directory: frontend-angular
+        run: npm run build
+
+      # ---------------- BACKEND (Spring Boot) ----------------
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        working-directory: backend-java
+        run: git update-index --chmod=+x gradlew || true
+
+      - name: Build Spring Boot backend
+        working-directory: backend-java
+        run: ./gradlew build
