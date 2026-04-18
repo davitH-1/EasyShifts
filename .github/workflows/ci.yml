@@ -22,13 +22,12 @@ jobs:
           cache: npm
 
       - name: Install frontend dependencies
-        working-directory: frontend-angular
         run: npm ci
+        working-directory: ${{ github.workspace }}/frontend-angular
 
       - name: Build Angular app
-        working-directory: frontend-angular
         run: npm run build
-
+        working-directory: ${{ github.workspace }}/frontend-angular
       # ---------------- BACKEND (Spring Boot) ----------------
       - name: Setup Java
         uses: actions/setup-java@v4
