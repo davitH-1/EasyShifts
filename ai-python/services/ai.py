@@ -2,12 +2,7 @@ import httpx
 import json
 from typing import Any
 from config import OLLAMA_HOST, OLLAMA_MODEL
-import json
 
-import ollama
-from typing import Any, List, Dict
-
-client = ollama.Client(host="http://172.27.23.8:11434")
 
 def _generate(prompt: str, model: str, fmt: str | None = None) -> dict:
     payload = {"model": model, "prompt": prompt, "stream": False}
@@ -33,8 +28,3 @@ def chat_json(prompt: str, model: str = OLLAMA_MODEL) -> dict:
 
 def chat_with_data(prompt: str, data: dict[str, Any], model: str = OLLAMA_MODEL) -> str:
     return chat(f"{prompt}\n\nData: {data}", model)
-def chat_with_data(prompt: str, data: dict[str, Any], model: str = "gemma4:e2b") -> str:
-    content = f"{prompt}\n\nData: {data}"
-    return chat(content, model)
-
-# Email generator

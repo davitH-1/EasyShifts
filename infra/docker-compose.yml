@@ -14,7 +14,7 @@ services:
     environment:
       SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
       SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
-      SPRING_AI_OLLAMA_BASE_URL: ${OLLAMA_HOST:-http://ollama:11434}
+      SPRING_AI_OLLAMA_BASE_URL: ${OLLAMA_HOST:-http://172.27.23.8:11434}
       AI_SERVICE_URL: http://ai-python:8000
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/easyshifts
       SPRING_DATASOURCE_USERNAME: easyshifts
@@ -24,25 +24,14 @@ services:
         condition: service_healthy
       ai-python:
         condition: service_started
-      ollama:
-        condition: service_started
 
   ai-python:
     build: ../ai-python
     ports:
       - "8000:8000"
     environment:
-      OLLAMA_HOST: ${OLLAMA_HOST:-http://ollama:11434}
+      OLLAMA_HOST: ${OLLAMA_HOST:-http://172.27.23.8:11434}
       OLLAMA_MODEL: ${OLLAMA_MODEL:-gemma4:e2b}
-    depends_on:
-      - ollama
-
-  ollama:
-    image: ollama/ollama
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama_data:/root/.ollama
 
   mysql:
     image: mysql:8.4
@@ -63,5 +52,4 @@ services:
       retries: 5
 
 volumes:
-  ollama_data:
   mysql_data:

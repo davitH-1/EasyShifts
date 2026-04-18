@@ -4,4 +4,3 @@ python-multipart
 pypdf
 httpx
 ollama
-email-service
