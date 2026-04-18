@@ -1,5 +1,6 @@
 #v1
-
+#Information of user email and recpeint
+#Get AI to generate email using variables
 import base64
 
 #import information from AI file
@@ -11,8 +12,8 @@ import ollama
 #get the information from the other files
 
 message =ollama.chat(model='gemma',messages=[
-    {'role':'user','content':'Generate an email saying that you are available to work the shitfs at (time) then asking to be put on the '
-    'schedule for those shifts'},
+    {'role':'user','content':'Generate an email saying that you are available to work the shitfs at (time) '
+    'then asking to be scheduled for those shifts'},
 ])
 
 
