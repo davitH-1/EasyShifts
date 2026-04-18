@@ -1,6 +1,7 @@
 import ollama
 from typing import Any
 
+client = ollama.Client(host="http://172.27.23.8:11434")
 
 def chat(prompt: str, model: str = "gemma4:e2b") -> str:
     response = ollama.chat(
