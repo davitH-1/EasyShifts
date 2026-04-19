@@ -1,7 +1,16 @@
-<h1>Job Requests</h1>
+<div class="jobs-header">
+  <h1>Job Requests</h1>
+  <button mat-raised-button color="primary" (click)="syncFromEmail()" [disabled]="syncing">
+    <mat-icon>email</mat-icon>
+    {{ syncing ? 'Syncing...' : 'Sync from Email' }}
+  </button>
+</div>
 
 <div class="job-list">
   @for (job of jobs; track job.id) {
     <app-job-card [job]="job"></app-job-card>
+  }
+  @if (jobs.length === 0 && !syncing) {
+    <p class="empty-state">No jobs found. Click "Sync from Email" to pull schedule PDFs.</p>
   }
 </div>

@@ -1,55 +1,28 @@
 import { Injectable } from '@angular/core';
-import { JobRequest } from '../models/job-request';
 import { HttpClient } from '@angular/common/http';
-import { delay, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { JobRequest } from '../models/job-request';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JobService {
-  private mockJobs: JobRequest[] = [
-    {
-      id: '1',
-      locationName: 'Warehouse A',
-      dateTime: '2026-04-16 09:00',
-      startTime: '12:00pm',
-      endTime: '6:00pm',
-      hours: 6,
-      status: 'pending',
-    },
-    {
-      id: '2',
-      locationName: 'Logistics Hub',
-      dateTime: '2026-04-17 12:00',
-      startTime: '12:00pm',
-      endTime: '4:00pm',
-      hours: 4,
-      status: 'confirmed',
-    },
-    {
-      id: '3',
-      locationName: 'Retail Store',
-      dateTime: '2026-04-18 08:00',
-      startTime: '12:00pm',
-      endTime: '5:00pm',
-      hours: 5,
-      status: 'rejected',
-    },
-  ];
+  private readonly api = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
 
-  getJobs(): JobRequest[] {
-    return this.mockJobs;
+  getJobs(): Observable<JobRequest[]> {
+    return this.http.get<JobRequest[]>(`${this.api}/api/jobs`, { withCredentials: true });
   }
 
   getJobById(id: string): Observable<JobRequest | null> {
-    const job = this.mockJobs.find((j) => j.id === id);
-
-    return of(job ?? null).pipe();
+    return this.http.get<JobRequest>(`${this.api}/api/jobs/${id}`, { withCredentials: true });
   }
-  // getJobById(id: string): Observable<JobRequest> {
-  //   // TODO: add the proper connection api call
-  //   return this.http.get<JobRequest>(`/api/jobs/${id}`);
-  // }
+
+  syncFromEmail(): Observable<{ synced: number; message: string }> {
+    return this.http.post<{ synced: number; message: string }>(
+      `${this.api}/api/gmail/sync`, {}, { withCredentials: true }
+    );
+  }
 }

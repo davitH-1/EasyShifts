@@ -14,7 +14,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
@@ -42,7 +41,8 @@ public class SecurityConfig {
             )
 
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/user/me", "/api/calendar/**").authenticated()
+                .requestMatchers("/api/user/me", "/api/calendar/**", "/api/shifts/**", "/api/gmail/**").authenticated()
+                .requestMatchers("/api/jobs").permitAll()
                 .anyRequest().permitAll()
             )
                 .oauth2Login(oauth2 -> {
@@ -80,7 +80,7 @@ public class SecurityConfig {
 
                                 auth.authorizationRequestResolver(customResolver);
                             })
-                            .defaultSuccessUrl("http://localhost:4200/profile", true);
+                            .defaultSuccessUrl("http://localhost/profile", true);
                 })
             .logout(logout -> logout
                 .logoutUrl("/logout")

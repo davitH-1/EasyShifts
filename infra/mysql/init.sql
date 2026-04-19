@@ -11,10 +11,13 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS shifts (
     id          BIGINT AUTO_INCREMENT PRIMARY KEY,
-    title       VARCHAR(255) NOT NULL,
-    start_time  DATETIME NOT NULL,
-    end_time    DATETIME NOT NULL,
+    title       VARCHAR(255),
     location    VARCHAR(255),
+    shift_date  DATE,
+    start_time  VARCHAR(20),
+    end_time    VARCHAR(20),
+    hours       DECIMAL(4,2),
+    status      ENUM('PENDING', 'CONFIRMED', 'REJECTED') DEFAULT 'PENDING',
     notes       TEXT,
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
