@@ -2,7 +2,7 @@ from typing import List, Dict
 
 import ollama
 
-from services.ai import client
+# from services.ai import client
 
 client = ollama.Client(host="http://172.27.23.8:11434")
 
