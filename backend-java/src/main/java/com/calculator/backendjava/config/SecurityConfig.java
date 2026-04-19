@@ -3,9 +3,12 @@ package com.calculator.backendjava.config;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.oauth2.client.JdbcOAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver;
@@ -91,6 +94,14 @@ public class SecurityConfig {
                 .deleteCookies("JSESSIONID")
             );
         return http.build();
+    }
+
+    @Bean
+    public OAuth2AuthorizedClientService authorizedClientService(
+        JdbcTemplate jdbcTemplate,
+        ClientRegistrationRepository clientRegistrationRepository
+    ) {
+        return new JdbcOAuth2AuthorizedClientService(jdbcTemplate, clientRegistrationRepository);
     }
 
     @Bean

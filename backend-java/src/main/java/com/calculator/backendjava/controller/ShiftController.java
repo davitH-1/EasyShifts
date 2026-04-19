@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "http://localhost")
 public class ShiftController {
 
     private final PdfService pdfService;

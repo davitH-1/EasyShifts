@@ -43,6 +43,8 @@ public class ShiftAutomationService {
             .call()
             .entity(new ParameterizedTypeReference<List<ValetShift>>() {});
 
+        if (parsed == null) return List.of();
+
         return parsed.stream()
             .map(this::toShift)
             .map(shiftRepository::save)

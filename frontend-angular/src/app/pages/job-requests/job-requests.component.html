@@ -1,5 +1,10 @@
 <div class="jobs-header">
   <h1>Job Requests</h1>
+  <button mat-raised-button color="accent" (click)="fileInput.click()" [disabled]="uploading">
+    <mat-icon>upload_file</mat-icon>
+    {{ uploading ? 'Parsing...' : 'Upload PDF' }}
+  </button>
+  <input #fileInput type="file" accept=".pdf" hidden (change)="uploadPdf($event)" />
   <button mat-raised-button color="primary" (click)="syncFromEmail()" [disabled]="syncing">
     <mat-icon>email</mat-icon>
     {{ syncing ? 'Syncing...' : 'Sync from Email' }}
@@ -10,7 +15,7 @@
   @for (job of jobs; track job.id) {
     <app-job-card [job]="job"></app-job-card>
   }
-  @if (jobs.length === 0 && !syncing) {
-    <p class="empty-state">No jobs found. Click "Sync from Email" to pull schedule PDFs.</p>
+  @if (jobs.length === 0 && !syncing && !uploading) {
+    <p class="empty-state">No jobs found. Upload a PDF or click "Sync from Email".</p>
   }
 </div>

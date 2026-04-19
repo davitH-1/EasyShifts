@@ -33,6 +33,9 @@ public class CalendarService {
         OAuth2AuthorizedClient client = authorizedClientService.loadAuthorizedClient(
             auth.getAuthorizedClientRegistrationId(), auth.getName()
         );
+        if (client == null) {
+            throw new IllegalStateException("No OAuth2 access token found — please sign out and sign in again.");
+        }
         String accessToken = client.getAccessToken().getTokenValue();
 
         ZonedDateTime startOfWeek = ZonedDateTime.now(ZoneOffset.UTC)

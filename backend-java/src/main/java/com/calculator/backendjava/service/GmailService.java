@@ -34,9 +34,12 @@ public class GmailService {
     }
 
     public List<Shift> syncScheduleEmails(OAuth2AuthenticationToken auth) throws Exception {
-        String token = authorizedClientService
-            .loadAuthorizedClient(auth.getAuthorizedClientRegistrationId(), auth.getName())
-            .getAccessToken().getTokenValue();
+        var authorizedClient = authorizedClientService
+            .loadAuthorizedClient(auth.getAuthorizedClientRegistrationId(), auth.getName());
+        if (authorizedClient == null) {
+            throw new IllegalStateException("No OAuth2 access token found — please sign out and sign in again.");
+        }
+        String token = authorizedClient.getAccessToken().getTokenValue();
 
         List<String> messageIds = listMessageIds(token);
         List<Shift> allShifts = new ArrayList<>();

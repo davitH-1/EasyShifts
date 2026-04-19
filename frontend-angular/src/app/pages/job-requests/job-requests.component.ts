@@ -15,6 +15,7 @@ import { JobRequest } from '../../core/models/job-request';
 export class JobRequestsComponent implements OnInit {
   jobs: JobRequest[] = [];
   syncing = false;
+  uploading = false;
 
   constructor(private jobService: JobService, private snackBar: MatSnackBar) {}
 
@@ -26,6 +27,20 @@ export class JobRequestsComponent implements OnInit {
     this.jobService.getJobs().subscribe({
       next: (jobs) => (this.jobs = jobs),
       error: () => (this.jobs = []),
+    });
+  }
+
+  uploadPdf(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+    this.uploading = true;
+    this.jobService.parsePdf(file).subscribe({
+      next: (shifts) => {
+        this.snackBar.open(`Parsed ${shifts.length} shift(s) from PDF`, 'Dismiss', { duration: 4000 });
+        this.loadJobs();
+      },
+      error: () => this.snackBar.open('Upload failed. Make sure you are signed in.', 'Dismiss', { duration: 4000 }),
+      complete: () => (this.uploading = false),
     });
   }
 

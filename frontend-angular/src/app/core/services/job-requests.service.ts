@@ -20,6 +20,12 @@ export class JobService {
     return this.http.get<JobRequest>(`${this.api}/api/jobs/${id}`, { withCredentials: true });
   }
 
+  parsePdf(file: File): Observable<any[]> {
+    const form = new FormData();
+    form.append('file', file);
+    return this.http.post<any[]>(`${this.api}/api/shifts/parse-pdf`, form, { withCredentials: true });
+  }
+
   syncFromEmail(): Observable<{ synced: number; message: string }> {
     return this.http.post<{ synced: number; message: string }>(
       `${this.api}/api/gmail/sync`, {}, { withCredentials: true }

@@ -35,6 +35,9 @@ dependencies {
     // Spring AI + Ollama (Compatible with Boot 3.2.x)
     implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter:1.0.0-M1'
 
+    // Persist HTTP sessions in MySQL so restarts don't log users out
+    implementation 'org.springframework.session:spring-session-jdbc'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
